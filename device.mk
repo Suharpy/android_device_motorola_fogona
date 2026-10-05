@@ -21,11 +21,18 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     bootctrl.bengal
 
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-    bootctrl.bengal \
+PRODUCT_PACKAGES += \
+    bootctrl.bengal.recovery \
+    android.hardware.boot@1.0-impl.recovery \
     libgptutils \
     libz \
     libcutils
+
+#PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+#    bootctrl.bengal \
+#    libgptutils \
+#    libz \
+#    libcutils
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
