@@ -12,6 +12,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit some common Omni stuff.
 #$(call inherit-product, vendor/omni/config/common.mk)
 $(call inherit-product, vendor/twrp/config/common.mk)
+#$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Inherit from fogona device
 $(call inherit-product, device/motorola/fogona/device.mk)
