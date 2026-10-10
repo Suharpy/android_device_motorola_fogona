@@ -1,42 +1,32 @@
-#
-# Copyright (C) 2026 The Android Open Source Project
-# Copyright (C) 2026 SebaUbuntu's TWRP device tree generator
-#
-# SPDX-License-Identifier: Apache-2.0
-#
+PRODUCT_SOONG_NAMESPACES += $(LOCAL_PATH)
 
-LOCAL_PATH := device/motorola/fogona
-# A/B
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_system=true \
-    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
-    FILESYSTEM_TYPE_system=ext4 \
-    POSTINSTALL_OPTIONAL_system=true
+# API
+#PRODUCT_TARGET_VNDK_VERSION := 30
+#PRODUCT_SHIPPING_API_LEVEL := 32
 
-# Boot control HAL
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-service
+## Dynamic partitions
+#PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-PRODUCT_PACKAGES += \
-    bootctrl.bengal
+## Screen
+##TARGET_SCREEN_HEIGHT := 2400
+#TARGET_SCREEN_WIDTH := 1080
 
-PRODUCT_PACKAGES += \
-    bootctrl.bengal.recovery \
-    android.hardware.boot@1.0-impl.recovery \
-    libgptutils \
-    libz \
-    libcutils
+## Fastbootd
+##PRODUCT_PACKAGES += \
+    ##android.hardware.fastboot@1.0-impl-mock \
+    ##android.hardware.fastboot@1.1-impl-mock.recovery \
+    #fastbootd
 
-#PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-#    bootctrl.bengal \
-#    libgptutils \
-#    libz \
-#    libcutils
+# Boot control hal for A/B
+#PRODUCT_PACKAGES += android.hardware.boot@1.1-impl-qti.recovery
 
-PRODUCT_PACKAGES += \
-    otapreopt_script \
-    cppreopts.sh \
-    update_engine \
-    update_verifier \
-    update_engine_sideload
+# Blacklist
+#PRODUCT_SYSTEM_PROPERTY_BLACKLIST += ro.bootimage.build.date.utc ro.build.date.utc
+
+# Copy modules for depmod
+PRODUCT_COPY_FILE += \
+	$(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+	$(call find-copy-subdir-files,*.ko,$(DEVICE_PATH)/recovery/root/vendor/lib/modules/1.1,$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1)
+	
+#call qualcomm commmon dependencies
+$(call inherit-product, device/qcom/common/common.mk)

@@ -17,8 +17,8 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 # Inherit from fogona device
 $(call inherit-product, device/motorola/fogona/device.mk)
 
+PRODUCT_NAME := twrp_fogona
 PRODUCT_DEVICE := fogona
-PRODUCT_NAME := omni_fogona
 PRODUCT_BRAND := motorola
 PRODUCT_MODEL := moto g play - 2024
 PRODUCT_MANUFACTURER := motorola
